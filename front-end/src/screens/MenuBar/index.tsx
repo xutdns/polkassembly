@@ -37,7 +37,7 @@ const MenuBar = ({ className } : Props): JSX.Element => {
 
 	// Menu Items
 	const contentItems = [
-		{ content:'Discussions', icon:'comments', key:'discussions', to:'/discussions' },
+		{ content: 'Discussions', icon:'comments', key:'discussions', to:'/discussions' },
 		{ content: 'Proposals', icon:'file alternate', key:'proposals', to:'/proposals' }
 	];
 
@@ -76,7 +76,7 @@ const MenuBar = ({ className } : Props): JSX.Element => {
 						Polkassembly
 					</Menu.Item>
 					<Menu.Item onClick={handleToggle} id='rightmenu'>
-						{!menuVisible ? <Icon name="sidebar" /> : <Icon name="close" />}
+						{!menuVisible ? <i className='material-icons'>menu</i> : <i className='material-icons'>close</i>}
 					</Menu.Item>
 				</Menu>
 				<Sidebar.Pushable className={className} style={{ height:pushableHeight }}>
@@ -133,6 +133,9 @@ export default styled(MenuBar)`
 		font-family: 'Roboto Mono';
 		border-radius: 0rem;
 		letter-spacing: 1.1;
+		.material-icons {
+			line-height: 0.8;
+		}
 
 		.item {
 			color: grey_secondary;
