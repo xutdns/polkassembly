@@ -1,6 +1,6 @@
 import { ApolloQueryResult } from 'apollo-client';
 import React, { useContext, useState } from 'react';
-import { Container, Grid } from 'semantic-ui-react';
+import { Container, Grid, Icon } from 'semantic-ui-react';
 import styled from '@xstyled/styled-components';
 
 import Comments from '../Comment/Comments';
@@ -9,6 +9,8 @@ import { UserDetailsContext } from '../../context/UserDetailsContext';
 import CreateRootComment from './CreateRootComment';
 import EditablePostContent from './EditablePostContent';
 import { PostAndCommentsQueryHookResult, PostAndCommentsQueryVariables, PostAndCommentsQuery } from '../../generated/graphql';
+import Button from '../../ui-components/Button';
+import VotingSlider from '../../ui-components/VotingSlider';
 
 interface Props {
 	className?: string;
@@ -49,7 +51,16 @@ const Post = ( { className, data, refetch }: Props ) => {
 							: null }
 					</div>
 				</Grid.Column>
-				<Grid.Column mobile={16} tablet={16} computer={6}></Grid.Column>
+				<Grid.Column mobile={16} tablet={16} computer={6}>
+					<div className='infoBox'>
+						<h4>Your Vote</h4>
+						<VotingSlider />
+						<div className='button-container'>
+							<Button secondary><Icon name='thumbs down'/>No</Button>
+							<Button primary><Icon name='thumbs up'/>Yes</Button>
+						</div>
+					</div>
+				</Grid.Column>
 			</Grid>
 		</Container>
 	);
@@ -82,6 +93,27 @@ export default styled(Post)`
 		font-family: 'Roboto';
 		font-size: xl;
 		margin-bottom: 0.4rem;
+	}
+
+	.infoBox {
+		background-color: white;
+		padding: 2rem 3rem;
+
+		h4 {
+			font-size: lg;
+			font-family: 'Roboto Mono';
+			margin-bottom: 2rem;
+		}
+
+		.button-container {
+			display: flex;
+			align-items: stretch;
+			margin: 1rem 0;
+
+			button {
+				width: 100%;
+			}
+		}
 	}
 
 	.post_content {
