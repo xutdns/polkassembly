@@ -1,5 +1,6 @@
 import { ApolloQueryResult } from 'apollo-client/core/types';
 import * as React from 'react';
+import { Avatar } from '@storybook/design-system';
 import styled from '@xstyled/styled-components';
 
 import Comments from './Comments';
@@ -22,38 +23,61 @@ export const Comment = ({ className, comment, refetch } : Props) => {
 	return (
 		<>
 			<div className={className}>
-				<CreationLabel
-					created_at={created_at}
-					displayname={author.name}
-					text={'commented'}
-					username={author.username}
-				/>
-				<UpdateLabel
-					created_at={created_at}
-					updated_at={updated_at}
-				/>
-				<EditableCommentContent
-					authorId={author.id}
-					commentId={id}
-					content={content}
-					refetch={refetch}
-				/>
-				{
-					c2 && c2.length
-						? <Comments
-							comments={c2 as CommentRecursiveFragment[]}
-							firstComment={false}
-							refetch={refetch}
-						/>
-						: null
-				}
+				<div className='avatar-container'>
+					<Avatar
+						className='avatar'
+						size='medium'
+						username={author.name ? author.name : author.username}
+					/>
+				</div>
+
+				<div className='comment-container'>
+					<CreationLabel
+						created_at={created_at}
+						displayname={author.name}
+						text={'commented'}
+						username={author.username}
+					/>
+					<UpdateLabel
+						created_at={created_at}
+						updated_at={updated_at}
+					/>
+					<EditableCommentContent
+						authorId={author.id}
+						commentId={id}
+						content={content}
+						refetch={refetch}
+					/>
+					{
+						c2 && c2.length
+							? <Comments
+								comments={c2 as CommentRecursiveFragment[]}
+								firstComment={false}
+								refetch={refetch}
+							/>
+							: null
+					}
+				</div>
 			</div>
 		</>
 	);
 };
 
 export default styled(Comment)`
-margin-top: 3rem;
+	margin-top: 3rem;
+	display: flex;
+   	flex-direction: row;
+   	align-items: flex-start;
+
+	.avatar-container {
+		margin: 0.5rem 2rem 0 0;
+	}
+
+	.avatar {
+		width: 3rem;
+		height: 3rem;
+		background-color: grey_primary;
+	}
 
 	.md {
 		margin-top: 1rem;
