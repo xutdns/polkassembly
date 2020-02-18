@@ -7,6 +7,7 @@ import EditableCommentContent from './EditableCommentContent';
 import { CommentRecursiveFragment, ProposalPostAndCommentsQueryVariables, ProposalPostAndCommentsQuery, ReferendumPostAndCommentsQueryVariables, DiscussionPostAndCommentsQueryVariables, ReferendumPostAndCommentsQuery, DiscussionPostAndCommentsQuery } from '../../generated/graphql';
 import Avatar from '../../ui-components/Avatar';
 import CreationLabel from '../../ui-components/CreationLabel';
+import EmojiReactions from '../../ui-components/EmojiReactions';
 import UpdateLabel from '../../ui-components/UpdateLabel';
 
 interface Props{
@@ -29,6 +30,7 @@ export const Comment = ({ className, comment, refetch } : Props) => {
 			/>
 			<div className='comment-box'>
 				<CreationLabel
+					className='creation-label'
 					created_at={created_at}
 					displayname={author.name}
 					text={'commented'}
@@ -53,6 +55,7 @@ export const Comment = ({ className, comment, refetch } : Props) => {
 						/>
 						: null
 				}
+				<EmojiReactions></EmojiReactions>
 			</div>
 		</div>
 	);
@@ -73,12 +76,15 @@ export default styled(Comment)`
 
 	.comment-box {
 		background-color: white;
-		padding: 2rem 3rem 2rem 3rem;
 		border-style: solid;
 		border-width: 1px;
 		border-color: grey_light;
 		margin-bottom: 1rem;
 		width: 100%;
+	}
+
+	.creation-label {
+		padding: 1rem 2rem;
 	}
 
 	.md {
