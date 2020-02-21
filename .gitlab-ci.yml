@@ -83,6 +83,7 @@ dockerize-front-end:
     - export BUILD_ARGS="$BUILD_ARGS --build-arg REACT_APP_JWT_PUBLIC_KEY=$(printf "%s" \'"$REACT_APP_JWT_PUBLIC_KEY"\')"
   only:
     - master
+    - /^fv-.*/
   <<: *build_and_push
 
 dockerize-auth-server:
