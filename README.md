@@ -4,4 +4,8 @@ This repo hosts the building blocks needed for Polkassembly.io
 - chain-db-watcher: a service creating or updating the discussion db as soon as governance events happen on-chain.
 - front-end: the React front-end application.
 
-`launch.sh` is a script that helps (first stop and then) launch the dockers and server in the right order as well as applying the migrations for the different db.
+`launch.sh` is a script that helps (first stop and then) launch the dockers and server in the right order as well as applying the migrations for the different dbs.
+
+### Contributing
+
+Please see the [Contributing Guidelines](./CONTRIBUTING.md)
