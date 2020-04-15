@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/polkassembly/static/css/main.96680b48.chunk.css",
+    "main.js": "/polkassembly/static/js/main.4927a586.chunk.js",
+    "main.js.map": "/polkassembly/static/js/main.4927a586.chunk.js.map",
+    "runtime-main.js": "/polkassembly/static/js/runtime-main.41e3331f.js",
+    "runtime-main.js.map": "/polkassembly/static/js/runtime-main.41e3331f.js.map",
+    "static/css/2.5b027483.chunk.css": "/polkassembly/static/css/2.5b027483.chunk.css",
+    "static/js/2.49c7ba0d.chunk.js": "/polkassembly/static/js/2.49c7ba0d.chunk.js",
+    "static/js/2.49c7ba0d.chunk.js.map": "/polkassembly/static/js/2.49c7ba0d.chunk.js.map",
+    "index.html": "/polkassembly/index.html",
+    "precache-manifest.c2e75111671409c8f08ec4cf0fd434ad.js": "/polkassembly/precache-manifest.c2e75111671409c8f08ec4cf0fd434ad.js",
+    "service-worker.js": "/polkassembly/service-worker.js",
+    "static/css/2.5b027483.chunk.css.map": "/polkassembly/static/css/2.5b027483.chunk.css.map",
+    "static/css/main.96680b48.chunk.css.map": "/polkassembly/static/css/main.96680b48.chunk.css.map",
+    "static/js/2.49c7ba0d.chunk.js.LICENSE.txt": "/polkassembly/static/js/2.49c7ba0d.chunk.js.LICENSE.txt",
+    "static/media/semantic.min.css": "/polkassembly/static/media/outline-icons.ef60a4f6.woff",
+    "static/media/polkassembly-logo.png": "/polkassembly/static/media/polkassembly-logo.aa0e69ae.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.41e3331f.js",
+    "static/css/2.5b027483.chunk.css",
+    "static/js/2.49c7ba0d.chunk.js",
+    "static/css/main.96680b48.chunk.css",
+    "static/js/main.4927a586.chunk.js"
+  ]
+}
