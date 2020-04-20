@@ -7,8 +7,8 @@ import styled from '@xstyled/styled-components';
 import BN from 'bn.js';
 import React, { useContext, useMemo,useState } from 'react';
 import { DropdownProps, Select } from 'semantic-ui-react';
-import { ApiContext } from 'src/context/ApiContext';
 import { NotificationContext } from 'src/context/NotificationContext';
+import { useApi } from 'src/hooks/useApi';
 import { LoadingStatusType,NotificationStatus } from 'src/types';
 import BalanceInput from 'src/ui-components/BalanceInput';
 import Button from 'src/ui-components/Button';
@@ -32,7 +32,7 @@ interface Props {
 const VoteRefrendum = ({ className, referendumId, address, accounts, onAccountChange, getAccounts }: Props) => {
 	const { queueNotification } = useContext(NotificationContext);
 	const [lockedBalance, setLockedBalance] = useState<BN | undefined>(undefined);
-	const { api, apiReady } = useContext(ApiContext);
+	const { api, apiReady } = useApi();
 	const [loadingStatus, setLoadingStatus] = useState<LoadingStatusType>({ isLoading: false, message: '' });
 	const CONVICTIONS: [number, number][] = [1, 2, 4, 8, 16, 32].map((lock, index) => [index + 1, lock]);
 

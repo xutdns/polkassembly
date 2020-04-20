@@ -5,9 +5,9 @@
 import { getPassingThreshold } from '@polkassembly/util';
 import styled from '@xstyled/styled-components';
 import BN from 'bn.js';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid } from 'semantic-ui-react';
-import { ApiContext } from 'src/context/ApiContext';
+import { useApi } from 'src/hooks/useApi';
 import { VoteThreshold } from 'src/types';
 import Card from 'src/ui-components/Card';
 import VoteProgress from 'src/ui-components/VoteProgress';
@@ -21,7 +21,7 @@ interface Props {
 
 const ReferendumVoteInfo = ({ className, referendumId, threshold }: Props) => {
 	const ZERO = new BN(0);
-	const { api, apiReady } = useContext(ApiContext);
+	const { api, apiReady } = useApi();
 	const [turnout, setTurnout] = useState(ZERO);
 	const [electorate, setElectorate] = useState(ZERO);
 	const [passingThreshold, setPassingThreshold] = useState(ZERO);

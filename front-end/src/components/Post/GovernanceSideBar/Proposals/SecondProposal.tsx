@@ -6,9 +6,9 @@ import { InjectedAccountWithMeta } from '@polkadot/extension-inject/types';
 import styled from '@xstyled/styled-components';
 import React, { useContext, useState } from 'react';
 import { DropdownProps } from 'semantic-ui-react';
+import { useApi } from 'src/hooks/useApi';
 import Loader from 'src/ui-components/Loader';
 
-import { ApiContext } from '../../../../context/ApiContext';
 import { NotificationContext } from '../../../../context/NotificationContext';
 import { LoadingStatusType,NotificationStatus } from '../../../../types';
 import AccountSelectionForm from '../../../../ui-components/AccountSelectionForm';
@@ -28,7 +28,7 @@ interface Props {
 const SecondProposal = ({ className, proposalId, address, accounts, onAccountChange, getAccounts }: Props) => {
 	const [loadingStatus, setLoadingStatus] = useState<LoadingStatusType>({ isLoading: false, message:'' });
 	const { queueNotification } = useContext(NotificationContext);
-	const { api, apiReady } = useContext(ApiContext);
+	const { api, apiReady } = useApi();
 
 	const secondProposal = async () => {
 		if (!api) {

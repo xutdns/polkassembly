@@ -5,11 +5,11 @@
 import { web3Accounts, web3Enable,web3FromSource } from '@polkadot/extension-dapp';
 import { InjectedAccountWithMeta } from '@polkadot/extension-inject/types';
 import styled from '@xstyled/styled-components';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { DropdownProps } from 'semantic-ui-react';
-import { ApiContext } from 'src/context/ApiContext';
 import { OnchainLinkMotionFragment, OnchainLinkProposalFragment, OnchainLinkReferendumFragment, OnchainLinkTreasuryProposalFragment } from 'src/generated/graphql';
 import { motionStatus,proposalStatus, referendumStatus } from 'src/global/statuses';
+import { useApi } from 'src/hooks/useApi';
 import { VoteThreshold } from 'src/types';
 import { Form } from 'src/ui-components/Form';
 
@@ -38,7 +38,7 @@ const GovenanceSideBar = ({ className, isMotion, isProposal, isReferendum, oncha
 	const [accounts, setAccounts] = useState<InjectedAccountWithMeta[]>([]);
 	const [extensionNotFound, setExtensionNotFound] = useState(false);
 	const [accountsNotFound, setAccountsNotFound] = useState(false);
-	const { api } = useContext(ApiContext);
+	const { api, apiReady } = useApi();
 
 	const canVote = !!status && !![proposalStatus.PROPOSED, referendumStatus.STARTED, motionStatus.PROPOSED].includes(status);
 
@@ -72,7 +72,7 @@ const GovenanceSideBar = ({ className, isMotion, isProposal, isReferendum, oncha
 
 			const injected = await web3FromSource(accounts[0].meta.source);
 
-			if (!api) {
+			if (!api || !apiReady) {
 				console.error('polkadot/api not set');
 				return;
 			}

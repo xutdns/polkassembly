@@ -3,10 +3,10 @@
 // of the Apache-2.0 license. See the LICENSE file for details.
 
 import styled from '@xstyled/styled-components';
-import React, { useContext, useEffect,useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import { Grid } from 'semantic-ui-react';
-import { ApiContext } from 'src/context/ApiContext';
 import { chainProperties } from 'src/global/networkConstants';
+import { useApi } from 'src/hooks/useApi';
 import Card from 'src/ui-components/Card';
 import formatBnBalance from 'src/util/formatBnBalance';
 import getNetwork from 'src/util/getNetwork';
@@ -19,7 +19,7 @@ interface Props {
 const ProposalVoteInfo = ({ className, proposalId }:  Props) => {
 	const [seconds, setSeconds] = useState(0);
 	const [deposit, setDeposit] = useState('');
-	const { api, apiReady } = useContext(ApiContext);
+	const { api, apiReady } = useApi();
 	const currentNetwork = getNetwork();
 
 	useEffect(() => {

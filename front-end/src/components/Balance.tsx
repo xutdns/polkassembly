@@ -4,10 +4,10 @@
 
 import { DeriveBalancesAccount } from '@polkadot/api-derive/types';
 import styled from '@xstyled/styled-components';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import formatBnBalance from 'src/util/formatBnBalance';
 
-import { ApiContext } from '../context/ApiContext';
+import { useApi } from '../hooks/useApi';
 
 interface Props {
 	address: string
@@ -16,12 +16,12 @@ interface Props {
 
 const Balance = ({ address, className }: Props) => {
 	const [balance, setBalance] = useState<string>('0');
-	const { api } = useContext(ApiContext);
+	const { api, apiReady } = useApi();
 
 	useEffect(() => {
 		let unsubscribe: () => void;
 
-		if (!api) {
+		if (!api || !apiReady) {
 			console.error('polkadot/api not set');
 			return;
 		}
@@ -33,7 +33,7 @@ const Balance = ({ address, className }: Props) => {
 			.catch(e => console.error(e));
 
 		return () => unsubscribe && unsubscribe();
-	}, [address, api]);
+	}, [address, api, apiReady]);
 
 	return (
 		<div className={className}>
