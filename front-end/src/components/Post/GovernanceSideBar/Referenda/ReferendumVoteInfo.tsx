@@ -3,11 +3,11 @@
 // of the Apache-2.0 license. See the LICENSE file for details.
 
 import { getPassingThreshold } from '@polkassembly/util';
+import { ApiPromiseContext } from '@substrate/context';
 import styled from '@xstyled/styled-components';
 import BN from 'bn.js';
 import React, { useContext, useEffect, useState } from 'react';
 import { Grid } from 'semantic-ui-react';
-import { ApiContext } from 'src/context/ApiContext';
 import { VoteThreshold } from 'src/types';
 import Card from 'src/ui-components/Card';
 import VoteProgress from 'src/ui-components/VoteProgress';
@@ -21,7 +21,7 @@ interface Props {
 
 const ReferendumVoteInfo = ({ className, referendumId, threshold }: Props) => {
 	const ZERO = new BN(0);
-	const { api, apiReady } = useContext(ApiContext);
+	const { api, isApiReady } = useContext(ApiPromiseContext);
 	const [turnout, setTurnout] = useState(ZERO);
 	const [electorate, setElectorate] = useState(ZERO);
 	const [passingThreshold, setPassingThreshold] = useState(ZERO);
@@ -34,7 +34,7 @@ const ReferendumVoteInfo = ({ className, referendumId, threshold }: Props) => {
 			return;
 		}
 
-		if (!apiReady) {
+		if (!isApiReady) {
 			console.error('api not ready');
 			return;
 		}
@@ -54,7 +54,7 @@ const ReferendumVoteInfo = ({ className, referendumId, threshold }: Props) => {
 			.catch(console.error);
 
 		return () => unsubscribe && unsubscribe();
-	}, [api, apiReady, referendumId]);
+	}, [api, isApiReady, referendumId]);
 
 	useEffect(() => {
 		if (!api) {
@@ -62,7 +62,7 @@ const ReferendumVoteInfo = ({ className, referendumId, threshold }: Props) => {
 			return;
 		}
 
-		if (!apiReady) {
+		if (!isApiReady) {
 			console.error('api not ready');
 			return;
 		}
@@ -76,7 +76,7 @@ const ReferendumVoteInfo = ({ className, referendumId, threshold }: Props) => {
 			.catch(console.error);
 
 		return () => unsubscribe && unsubscribe();
-	},[api, apiReady]);
+	},[api, isApiReady]);
 
 	useEffect(() => {
 		if (!threshold){

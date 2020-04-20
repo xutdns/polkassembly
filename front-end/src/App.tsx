@@ -2,6 +2,8 @@
 // This software may be modified and distributed under the terms
 // of the Apache-2.0 license. See the LICENSE file for details.
 
+import { WsProvider } from '@polkadot/api';
+import { ApiPromiseContextProvider } from '@substrate/context';
 import { ThemeProvider } from '@xstyled/styled-components';
 import React from 'react';
 import { BrowserRouter as Router, Route,Switch } from 'react-router-dom';
@@ -12,7 +14,6 @@ import Footer from './components/Footer';
 import MenuBar from './components/MenuBar';
 import Modal from './components/Modal';
 import Notifications from './components/Notifications';
-import { ApiContextProvider } from './context/ApiContext';
 import { ModalProvider } from './context/ModalContext';
 import { NotificationProvider } from './context/NotificationContext';
 import { UserDetailsProvider } from './context/UserDetailsContext';
@@ -38,6 +39,9 @@ import VerifyEmail from './screens/VerifyEmail';
 import { theme } from './themes/theme';
 import { GlobalStyle } from './ui-components/GlobalStyle';
 
+const WS_PROVIDER = process.env.REACT_APP_WS_PROVIDER || 'wss://kusama-rpc.polkadot.io';
+const provider = new WsProvider(WS_PROVIDER);
+
 const App = () => {
 
 	return (
@@ -47,7 +51,7 @@ const App = () => {
 					<NotificationProvider>
 						<ModalProvider>
 							<UserDetailsProvider>
-								<ApiContextProvider>
+								<ApiPromiseContextProvider provider={provider}>
 									<Apollo>
 										<GlobalStyle />
 										<Notifications/>
@@ -124,7 +128,7 @@ const App = () => {
 											<Footer />
 										</div>
 									</Apollo>
-								</ApiContextProvider>
+								</ApiPromiseContextProvider>
 							</UserDetailsProvider>
 						</ModalProvider>
 					</NotificationProvider>

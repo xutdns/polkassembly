@@ -2,10 +2,10 @@
 // This software may be modified and distributed under the terms
 // of the Apache-2.0 license. See the LICENSE file for details.
 
+import { ApiPromiseContext } from '@substrate/context';
 import styled from '@xstyled/styled-components';
 import React, { useContext, useEffect,useState } from 'react';
 import { Grid } from 'semantic-ui-react';
-import { ApiContext } from 'src/context/ApiContext';
 import { chainProperties } from 'src/global/networkConstants';
 import Card from 'src/ui-components/Card';
 import formatBnBalance from 'src/util/formatBnBalance';
@@ -19,7 +19,7 @@ interface Props {
 const ProposalVoteInfo = ({ className, proposalId }:  Props) => {
 	const [seconds, setSeconds] = useState(0);
 	const [deposit, setDeposit] = useState('');
-	const { api, apiReady } = useContext(ApiContext);
+	const { api, isApiReady } = useContext(ApiPromiseContext);
 	const currentNetwork = getNetwork();
 
 	useEffect(() => {
@@ -28,7 +28,7 @@ const ProposalVoteInfo = ({ className, proposalId }:  Props) => {
 			return;
 		}
 
-		if (!apiReady) {
+		if (!isApiReady) {
 			console.error('api not ready');
 			return;
 		}
@@ -48,7 +48,7 @@ const ProposalVoteInfo = ({ className, proposalId }:  Props) => {
 
 		return () => unsubscribe && unsubscribe();
 
-	}, [api, apiReady, proposalId]);
+	}, [api, isApiReady, proposalId]);
 
 	return (
 		<Card className={className}>
